@@ -1,11 +1,9 @@
 name: solar system workflows
-
 on: 
     push:
         branches:
             - 'main'
             - 'feature/*'
-
 env:
     MONGO_URI: mongodb+srv://supercluster.d83jj.mongodb.net/superData
     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
@@ -14,7 +12,6 @@ jobs:
     unit-testing:
         name: unit testing
         runs-on: ubuntu-latest
-
         steps:
             - name: checkout 
               uses: actions/checkout@v4
@@ -30,4 +27,10 @@ jobs:
 
             - name: unit test
               run: npm test
+
+            - name: archive test result
+              uses: actions/upload-artifact@v3
+              with:
+                name: mocha-test-rsult
+                path: test-result.xml
 
