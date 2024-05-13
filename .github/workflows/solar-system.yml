@@ -31,7 +31,7 @@ jobs:
             - name: archive test result
               uses: actions/upload-artifact@v3
               with:
-                name: mocha-test-rsult
+                name: mocha-test-result
                 path: test-result.xml
-                
+
 
