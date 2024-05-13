@@ -8,6 +8,7 @@ env:
     MONGO_URI: mongodb+srv://supercluster.d83jj.mongodb.net/superData
     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
     MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
 jobs:
     unit-testing:
         name: unit testing
@@ -68,6 +69,18 @@ jobs:
                 name: code-coverage-result
                 path: coverage
                 retention-day: 5
+    
+    docker:
+      name: containerization
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout 
+          uses: actions/checkout@v4
 
+        - name: Login to Docker Hub
+          uses: docker/login-action@v3
+          with:
+           username: ${{ vars.DOCKERHUB_USERNAME }}
+           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
